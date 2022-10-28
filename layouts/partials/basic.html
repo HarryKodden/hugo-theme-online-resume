@@ -1,6 +1,19 @@
-{{ $basic := .basic }}
+{{ $basic := .basic }} {{ $contact := .contact }}
 <section class="basic">
-  {{ if $basic.avatar.path | and $basic.avatar.display }}
+  {{ if $basic.qrcode.display }}
+  <div class="p0 m0 text-center">
+    <p class="card-text">Scan contact card</p>
+    <img
+      id="qr-code"
+      class="card-img-top"
+      alt="Scannable QR code with contact
+      info"
+      src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=MECARD:N:{{
+      $basic.name }};TEL:{{ $contact.phone }};EMAIL:{{ $contact.email }};URL:{{
+      .Site.BaseURL }};NOTE:{{ $basic.title }};;"
+    />
+  </div>
+  {{ end }} {{ if $basic.avatar.path | and $basic.avatar.display }}
   <div class="avatar">
     <img src="/images/{{ $basic.avatar.path }}" alt="avatar" />
   </div>
@@ -13,8 +26,6 @@
     {{ end }} {{ end }}
 
     <div class="contact">{{ partial "contact.html" . }}</div>
-
-    {{ if $basic.avatar.display }} {{ partial "contact-qr" . }} {{ end }}
   </div>
 
   {{ else }}
