@@ -1,40 +1,32 @@
 {{ $basic := .basic }}
 <section class="basic">
-    {{ if $basic.avatar.path | and $basic.avatar.display }}
-    <div class="avatar">
-        <img src='/images/{{ $basic.avatar.path }}' alt="avatar">
-    </div>
+  {{ if $basic.avatar.path | and $basic.avatar.display }}
+  <div class="avatar">
+    <img src="/images/{{ $basic.avatar.path }}" alt="avatar" />
+  </div>
 
-    <div class="header">
-        {{ if $basic.name }}
-        <h2 class="name">{{ $basic.name }}</h2>
-        {{ if $basic.title }}
-        <h3 class="title">{{ $basic.title }}</h3>
-        {{ end }}
-        {{ end }}
+  <div class="header">
+    {{ if $basic.name }}
+    <h2 class="name">{{ $basic.name }}</h2>
+    {{ if $basic.title }}
+    <h3 class="title">{{ $basic.title }}</h3>
+    {{ end }} {{ end }}
 
-        <div class="contact">
+    <div class="contact">{{ partial "contact.html" . }}</div>
 
-            {{ partial "contact.html" . }}
+    {{ if $basic.avatar.display }} {{ partial "contact-qr" . }} {{ end }}
+  </div>
 
-        </div>
-    </div>
+  {{ else }}
 
-    {{ else }}
+  <div class="header text-center">
+    {{ if $basic.name }}
+    <h2 class="name">{{ $basic.name }}</h2>
+    {{ if $basic.title }}
+    <h3 class="title">{{ $basic.title }}</h3>
+    {{ end }} {{ end }}
 
-    <div class="header text-center">
-        {{ if $basic.name }}
-        <h2 class="name">{{ $basic.name }}</h2>
-        {{ if $basic.title }}
-        <h3 class="title">{{ $basic.title }}</h3>
-        {{ end }}
-        {{ end }}
-
-        <div class="contact">
-
-            {{ partial "contact.html" . }}
-
-        </div>
-    </div>
-    {{ end }}
+    <div class="contact">{{ partial "contact.html" . }}</div>
+  </div>
+  {{ end }}
 </section>
